@@ -1,0 +1,65 @@
+//Code here was written to trouble shoot bad IR sensors, we used various pins with the microcontroller to 
+//ensure sensor functionality
+
+//Components: ESP32 microcontroller, QRE1113 IR sensor, WS2812 RGB light
+
+
+int leftsensor = 39; // middle sensor connected to pin 
+int middlesensor = 34; // right sensor connected to pin
+int rightsensor = 36; // left sensor connected to pin
+
+
+#include <FastLED.h>  //for rgb light
+#define LED_PIN 13
+#define NUM_LEDS 5
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+ 
+
+  //RGB light set up
+  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+   //can take out if needed, not really necessary RGB light
+      leds[0] = CRGB(255,255,255);
+      FastLED.show();
+      leds[1] = CRGB(255,255,255);
+      FastLED.show();
+      leds[2] = CRGB(255,255,255);
+      FastLED.show();
+      leds[3] = CRGB(255,255,255);
+      FastLED.show();
+      leds[4] = CRGB(255,255,255);
+      FastLED.show();
+
+int counter = 0;
+      
+     //read values of all sensors
+     int leftSensor = analogRead(leftsensor);
+     int middleSensor = analogRead(middlesensor);
+     int rightSensor = analogRead(rightsensor);
+   
+     Serial.print(leftSensor);
+     Serial.print(',');
+
+     
+     Serial.print(middleSensor);
+     Serial.print(',');
+   
+    
+ 
+     Serial.print(rightSensor);
+     Serial.print(',');
+     Serial.println();
+
+     
+
+}
